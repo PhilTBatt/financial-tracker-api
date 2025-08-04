@@ -1,15 +1,25 @@
 package io.github.philtbatt.financialtrackerapi.controller;
 
 import io.github.philtbatt.financialtrackerapi.model.FileData;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import io.github.philtbatt.financialtrackerapi.model.UploadResponseData;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class FileController {
 
-    @PostMapping("/upload")
-    public FileData upload(@RequestBody FileData fileData) {
-        return fileData;
+    @PostMapping("/files/upload")
+    public UploadResponseData upload(@RequestBody MultipartFile file) {
+        return new UploadResponseData("Upload successful.");
+    }
+
+    @GetMapping("/files/")
+    public FileData fetchFiles() {
+        return new FileData("Placeholder");
+    }
+
+    @GetMapping("/files/{id}")
+    public FileData fetchFile(@PathVariable int id) {
+        return new FileData("Placeholder");
     }
 }
