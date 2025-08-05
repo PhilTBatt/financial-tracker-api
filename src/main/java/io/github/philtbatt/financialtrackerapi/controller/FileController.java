@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping("/file")
+@RequestMapping("/api/file")
 @RestController
 public class FileController {
 
@@ -17,7 +17,8 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> upload(@RequestParam MultipartFile file) {
-        return ResponseEntity.ok("File uploaded");
+        String url = fileService.upload(file);
+        return ResponseEntity.ok(url);
     }
 
     @GetMapping("/")
