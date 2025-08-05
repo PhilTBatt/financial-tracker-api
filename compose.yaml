@@ -2,4 +2,6 @@ services:
   financial-tracker-api:
     image: financial-tracker-api:0.0.1-SNAPSHOT
     ports:
-      - "8081:8080"
+      - "8080:8080"
+    env_file:
+      - .env
