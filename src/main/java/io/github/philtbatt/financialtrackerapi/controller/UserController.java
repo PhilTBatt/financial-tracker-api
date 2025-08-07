@@ -3,20 +3,21 @@ package io.github.philtbatt.financialtrackerapi.controller;
 import io.github.philtbatt.financialtrackerapi.model.UserData;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("/api/users")
 @RestController
 public class UserController {
 
-    @PostMapping("/user/upload")
+    @PostMapping("/")
     public UserData upload(@RequestBody UserData fileData) {
         return fileData;
     }
 
-    @GetMapping("/user/")
+    @GetMapping("/")
     public UserData fetchUsers() {
         return new UserData();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public UserData fetchUser(@PathVariable int id) {
         return new UserData();
     }

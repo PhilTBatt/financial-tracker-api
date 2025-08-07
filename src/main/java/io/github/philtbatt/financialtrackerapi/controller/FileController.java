@@ -1,6 +1,7 @@
 package io.github.philtbatt.financialtrackerapi.controller;
 
 import io.github.philtbatt.financialtrackerapi.service.FileService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ public class FileController {
     }
 
     @PostMapping("/upload")
+    @Operation(summary = "Upload a file")
     public ResponseEntity<String> upload(@RequestParam MultipartFile file) {
         String url = fileService.upload(file);
         return ResponseEntity.ok(url);
