@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/file")
 @RestController
 public class FileController {
@@ -18,9 +21,10 @@ public class FileController {
 
     @PostMapping("/upload")
     @Operation(summary = "Upload a file")
-    public ResponseEntity<String> upload(@RequestParam MultipartFile file) {
-        String url = fileService.upload(file);
-        return ResponseEntity.ok(url);
+    public ResponseEntity<Map<String, String>> upload(@RequestParam("file") MultipartFile file) {
+        fileService.upload(file);
+        Map<String, String> response = Map.of("msg","File uploaded");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/")

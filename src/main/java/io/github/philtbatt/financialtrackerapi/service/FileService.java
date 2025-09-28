@@ -22,7 +22,7 @@ public class FileService {
 
     public String upload(MultipartFile file) {
         try {
-            String key = "uploads/" + UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String key = "upload/" + UUID.randomUUID() + "_" + file.getOriginalFilename();
 
             Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
             file.transferTo(tempFile.toFile());
