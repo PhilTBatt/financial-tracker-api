@@ -3,7 +3,7 @@ package io.github.philtbatt.financialtrackerapi.model;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
 @DynamoDbBean
-public class TransactionItem {
+public class Transaction {
 
     private String date;
     private Double amount;

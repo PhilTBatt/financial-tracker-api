@@ -2,7 +2,7 @@ package io.github.philtbatt.financialtrackerapi.controller;
 
 import io.github.philtbatt.financialtrackerapi.service.FileService;
 import io.github.philtbatt.financialtrackerapi.service.DynamoDBService;
-import io.github.philtbatt.financialtrackerapi.model.TransactionList;
+import io.github.philtbatt.financialtrackerapi.model.TransactionRecord;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +33,8 @@ public class FileController {
 
     @Operation(summary = "Get transaction list")
     @GetMapping("/transactions/{id}")
-    public ResponseEntity<TransactionList> get(@PathVariable String id) {
-        TransactionList item = dynamoDBService.getById(id);
+    public ResponseEntity<TransactionRecord> get(@PathVariable String id) {
+        TransactionRecord item = dynamoDBService.getById(id);
         return item == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(item);
     }
 

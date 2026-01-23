@@ -7,23 +7,25 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttri
 import java.util.List;
 
 @DynamoDbBean
-public class TransactionList {
+public class TransactionRecord {
     private String id;
-    private List<TransactionItem> transactions;
+    private List<Transaction> transactions;
+    private Metrics metrics;
     private String createdAt;
 
     @DynamoDbPartitionKey
-    public String getId() { return this.id; }
-
+    public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public List<TransactionItem> getTransactions() { return this.transactions; }
+    @DynamoDbAttribute("transactions")
+    public List<Transaction> getTransactions() { return transactions; }
+    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 
-    public void setTransactions(List<TransactionItem> transactions) { this.transactions = transactions;}
+    public Metrics getMetrics() { return metrics; }
+    public void setMetrics(Metrics metrics) { this.metrics = metrics; }
 
     @DynamoDbAttribute("created_at")
-    public String getCreatedAt() { return this.createdAt; }
-
+    public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
 }
