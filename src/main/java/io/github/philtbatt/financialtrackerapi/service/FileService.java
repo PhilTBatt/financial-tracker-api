@@ -22,7 +22,8 @@ public class FileService {
 
     public String upload(MultipartFile file) {
         try {
-            String key = "upload/" + UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String ID = UUID.randomUUID().toString();
+            String key = "upload/" + ID + "_" + file.getOriginalFilename();
 
             Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
             file.transferTo(tempFile.toFile());
@@ -37,7 +38,7 @@ public class FileService {
 
             Files.deleteIfExists(tempFile);
 
-            return "https://%s.s3.amazonaws.com/%s".formatted(bucketName, key);
+            return ID;
         } catch (IOException e) {
             throw new RuntimeException("Upload failed", e);
         }
