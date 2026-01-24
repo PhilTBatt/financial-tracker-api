@@ -1,5 +1,8 @@
 package io.github.philtbatt.financialtrackerapi.service;
 
+import io.github.philtbatt.financialtrackerapi.model.Metrics;
+import io.github.philtbatt.financialtrackerapi.model.Transaction;
+import io.github.philtbatt.financialtrackerapi.model.TransactionRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -8,6 +11,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.UUID;
 
 @Service

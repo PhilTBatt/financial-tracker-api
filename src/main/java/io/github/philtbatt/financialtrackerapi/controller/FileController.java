@@ -37,9 +37,4 @@ public class FileController {
         TransactionRecord item = dynamoDBService.getById(id);
         return item == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(item);
     }
-
-    @GetMapping("/file/{id}")
-    public ResponseEntity<String> fetchFile(@PathVariable int id) {
-        return ResponseEntity.ok("Getting File");
-    }
 }
