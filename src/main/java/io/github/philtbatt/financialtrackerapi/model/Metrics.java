@@ -4,21 +4,18 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 
 import java.util.List;
+import java.util.Map;
 
 @DynamoDbBean
 public class Metrics {
-
     private Integer totalTransactions;
-
     private Long totalSpent;
     private Long avgMonthlySpend;
-
     private String topCategory;
     private Long topCategorySpent;
-
     private String dateRangeLabel;
-
     private List<SpendPoint> monthlySpendHistory;
+    private Map<String, Long> categorySpendTotals;
 
     @DynamoDbAttribute("total_transactions")
     public Integer getTotalTransactions() { return totalTransactions; }
@@ -47,6 +44,10 @@ public class Metrics {
     @DynamoDbAttribute("monthly_spend_history")
     public List<SpendPoint> getMonthlySpendHistory() { return monthlySpendHistory; }
     public void setMonthlySpendHistory(List<SpendPoint> monthlySpendHistory) { this.monthlySpendHistory = monthlySpendHistory; }
+
+    @DynamoDbAttribute("category_spend_totals")
+    public Map<String, Long> getCategorySpendTotals() { return categorySpendTotals; }
+    public void setCategorySpendTotals(Map<String, Long> categorySpendTotals) { this.categorySpendTotals = categorySpendTotals; }
 
     @DynamoDbBean
     public static class SpendPoint {

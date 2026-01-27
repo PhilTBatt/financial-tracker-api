@@ -26,8 +26,8 @@ public class FileController {
     @PostMapping("/upload")
     @Operation(summary = "Upload a file")
     public ResponseEntity<Map<String, String>> upload(@RequestParam("file") MultipartFile file) {
-        String key = fileService.upload(file);
-        Map<String, String> response = Map.of("s3Key", key,"msg", "File uploaded");
+        String id = fileService.upload(file);
+        Map<String, String> response = Map.of("id", id);
         return ResponseEntity.ok(response);
     }
 

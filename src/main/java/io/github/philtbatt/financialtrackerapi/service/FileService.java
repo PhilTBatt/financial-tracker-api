@@ -26,8 +26,8 @@ public class FileService {
 
     public String upload(MultipartFile file) {
         try {
-            String ID = UUID.randomUUID().toString();
-            String key = ID + "_" + file.getOriginalFilename();
+            String id = UUID.randomUUID().toString();
+            String key = id + "_" + file.getOriginalFilename();
 
             Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
             file.transferTo(tempFile.toFile());
@@ -42,7 +42,7 @@ public class FileService {
 
             Files.deleteIfExists(tempFile);
 
-            return ID;
+            return id;
         } catch (IOException e) {
             throw new RuntimeException("Upload failed", e);
         }
