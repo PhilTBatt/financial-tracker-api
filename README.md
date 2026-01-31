@@ -6,7 +6,7 @@ It handles file upload and retrieval of processed transaction records stored in 
 It is used in conjunction with an Angular front end and a Python AWS Lambda function, and interacts with AWS services using the AWS SDK.
 
 Front end repo: https://github.com/PhilTBatt/financial-tracker-app  
-Lambda repo: https://github.com/PhilTBatt/financial-tracker-app-lambda-layer
+Lambda repo: https://github.com/PhilTBatt/financial-tracker-api-lambda-layer
 
 ---
 
