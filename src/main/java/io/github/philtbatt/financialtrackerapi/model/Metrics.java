@@ -1,65 +1,96 @@
 package io.github.philtbatt.financialtrackerapi.model;
 
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
 import java.util.List;
 import java.util.Map;
 
 @DynamoDbBean
 public class Metrics {
+
     private Integer totalTransactions;
-    private Long totalSpent;
-    private Long avgMonthlySpend;
-    private String topCategory;
-    private Long topCategorySpent;
     private String dateRangeLabel;
-    private List<SpendPoint> monthlySpendHistory;
-    private Map<String, Long> categorySpendTotals;
+
+    private PeriodMetrics monthly;
+    private PeriodMetrics weekly;
+
+    private Buckets buckets;
 
     @DynamoDbAttribute("total_transactions")
     public Integer getTotalTransactions() { return totalTransactions; }
     public void setTotalTransactions(Integer totalTransactions) { this.totalTransactions = totalTransactions; }
 
-    @DynamoDbAttribute("total_spent")
-    public Long getTotalSpent() { return totalSpent; }
-    public void setTotalSpent(Long totalSpent) { this.totalSpent = totalSpent; }
-
-    @DynamoDbAttribute("avg_monthly_spend")
-    public Long getAvgMonthlySpend() { return avgMonthlySpend; }
-    public void setAvgMonthlySpend(Long avgMonthlySpend) { this.avgMonthlySpend = avgMonthlySpend; }
-
-    @DynamoDbAttribute("top_category")
-    public String getTopCategory() { return topCategory; }
-    public void setTopCategory(String topCategory) { this.topCategory = topCategory; }
-
-    @DynamoDbAttribute("top_category_spent")
-    public Long getTopCategorySpent() { return topCategorySpent; }
-    public void setTopCategorySpent(Long topCategorySpent) { this.topCategorySpent = topCategorySpent; }
-
     @DynamoDbAttribute("date_range_label")
     public String getDateRangeLabel() { return dateRangeLabel; }
     public void setDateRangeLabel(String dateRangeLabel) { this.dateRangeLabel = dateRangeLabel; }
 
-    @DynamoDbAttribute("monthly_spend_history")
-    public List<SpendPoint> getMonthlySpendHistory() { return monthlySpendHistory; }
-    public void setMonthlySpendHistory(List<SpendPoint> monthlySpendHistory) { this.monthlySpendHistory = monthlySpendHistory; }
+    @DynamoDbAttribute("monthly")
+    public PeriodMetrics getMonthly() { return monthly; }
+    public void setMonthly(PeriodMetrics monthly) { this.monthly = monthly; }
 
-    @DynamoDbAttribute("category_spend_totals")
-    public Map<String, Long> getCategorySpendTotals() { return categorySpendTotals; }
-    public void setCategorySpendTotals(Map<String, Long> categorySpendTotals) { this.categorySpendTotals = categorySpendTotals; }
+    @DynamoDbAttribute("weekly")
+    public PeriodMetrics getWeekly() { return weekly; }
+    public void setWeekly(PeriodMetrics weekly) { this.weekly = weekly; }
+
+    @DynamoDbAttribute("buckets")
+    public Buckets getBuckets() { return buckets; }
+    public void setBuckets(Buckets buckets) { this.buckets = buckets; }
 
     @DynamoDbBean
-    public static class SpendPoint {
-        private String period;
-        private Long amount;
+    public static class PeriodMetrics {
+        private List<String> labels;
+        private List<Long> in;
+        private List<Long> out;
+        private Long avgOut;
+        private Map<String, List<Long>> byCategoryOut;
 
-        @DynamoDbAttribute("period")
-        public String getPeriod() { return period; }
-        public void setPeriod(String period) { this.period = period; }
+        @DynamoDbAttribute("labels")
+        public List<String> getLabels() { return labels; }
+        public void setLabels(List<String> labels) { this.labels = labels; }
 
-        @DynamoDbAttribute("amount")
-        public Long getAmount() { return amount; }
-        public void setAmount(Long amount) { this.amount = amount; }
+        @DynamoDbAttribute("in")
+        public List<Long> getIn() { return in; }
+        public void setIn(List<Long> in) { this.in = in; }
+
+        @DynamoDbAttribute("out")
+        public List<Long> getOut() { return out; }
+        public void setOut(List<Long> out) { this.out = out; }
+
+        @DynamoDbAttribute("avgOut")
+        public Long getAvgOut() { return avgOut; }
+        public void setAvgOut(Long avgOut) { this.avgOut = avgOut; }
+
+        @DynamoDbAttribute("byCategoryOut")
+        public Map<String, List<Long>> getByCategoryOut() { return byCategoryOut; }
+        public void setByCategoryOut(Map<String, List<Long>> byCategoryOut) { this.byCategoryOut = byCategoryOut; }
+    }
+
+    @DynamoDbBean
+    public static class Buckets {
+        private BucketSeries outgoingSize;
+        private BucketSeries incomingSize;
+
+        @DynamoDbAttribute("outgoingSize")
+        public BucketSeries getOutgoingSize() { return outgoingSize; }
+        public void setOutgoingSize(BucketSeries outgoingSize) { this.outgoingSize = outgoingSize; }
+
+        @DynamoDbAttribute("incomingSize")
+        public BucketSeries getIncomingSize() { return incomingSize; }
+        public void setIncomingSize(BucketSeries incomingSize) { this.incomingSize = incomingSize; }
+    }
+
+    @DynamoDbBean
+    public static class BucketSeries {
+        private List<String> labels;
+        private List<Integer> counts;
+
+        @DynamoDbAttribute("labels")
+        public List<String> getLabels() { return labels; }
+        public void setLabels(List<String> labels) { this.labels = labels; }
+
+        @DynamoDbAttribute("counts")
+        public List<Integer> getCounts() { return counts; }
+        public void setCounts(List<Integer> counts) { this.counts = counts; }
     }
 }
