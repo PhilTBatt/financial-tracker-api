@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
-@CrossOrigin(origins = "https://philtbatt.github.io")
+@CrossOrigin(origins = {"https://philtbatt.github.io", "http://localhost:4200"})
 @RequestMapping("/api")
 @RestController
 public class FileController {
