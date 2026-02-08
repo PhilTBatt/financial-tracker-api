@@ -17,14 +17,12 @@ public class TransactionRecord {
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    @DynamoDbAttribute("transactions")
     public List<Transaction> getTransactions() { return transactions; }
     public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 
     public Metrics getMetrics() { return metrics; }
     public void setMetrics(Metrics metrics) { this.metrics = metrics; }
 
-    @DynamoDbAttribute("created_at")
     public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
