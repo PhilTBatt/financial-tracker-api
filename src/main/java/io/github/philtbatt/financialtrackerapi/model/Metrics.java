@@ -134,6 +134,22 @@ public class Metrics {
     }
 
     @DynamoDbBean
+    public static class DailySeries {
+        private List<String> labels;
+        private List<Long> out;
+        private List<Long> in;
+
+        public List<String> getLabels() { return labels; }
+        public void setLabels(List<String> labels) { this.labels = labels; }
+
+        public List<Long> getOut() { return out; }
+        public void setOut(List<Long> out) { this.out = out; }
+
+        public List<Long> getIn() { return in; }
+        public void setIn(List<Long> in) { this.in = in; }
+    }
+
+    @DynamoDbBean
     public static class RollingSeries {
         private Integer window;
         private List<Long> values;
