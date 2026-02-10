@@ -16,6 +16,9 @@ public class Metrics {
     private Long avgMonthlySpend;
     private Long avgWeeklySpend;
     private Categories categories;
+    private DailySeries daily;
+    private RollingSeries rollingOut7d;
+    private List<RankedTransaction> topOutgoingTransactions;
 
     public Integer getTotalTransactions() { return totalTransactions; }
     public void setTotalTransactions(Integer totalTransactions) { this.totalTransactions = totalTransactions; }
@@ -40,6 +43,15 @@ public class Metrics {
 
     public Categories getCategories() { return categories; }
     public void setCategories(Categories categories) { this.categories = categories; }
+
+    public DailySeries getDaily() { return daily; }
+    public void setDaily(DailySeries daily) { this.daily = daily; }
+
+    public RollingSeries getRollingOut7d() { return rollingOut7d; }
+    public void setRollingOut7d(RollingSeries rollingOut7d) { this.rollingOut7d = rollingOut7d; }
+
+    public List<RankedTransaction> getTopOutgoingTransactions() { return topOutgoingTransactions; }
+    public void setTopOutgoingTransactions(List<RankedTransaction> topOutgoingTransactions) { this.topOutgoingTransactions = topOutgoingTransactions; }
 
     @DynamoDbBean
     public static class PeriodMetrics {
@@ -119,5 +131,33 @@ public class Metrics {
 
         public List<Integer> getCounts() { return counts; }
         public void setCounts(List<Integer> counts) { this.counts = counts; }
+    }
+
+    @DynamoDbBean
+    public static class RollingSeries {
+        private Integer window;
+        private List<Long> values;
+
+        public Integer getWindow() { return window; }
+        public void setWindow(Integer window) { this.window = window; }
+
+        public List<Long> getValues() { return values; }
+        public void setValues(List<Long> values) { this.values = values; }
+    }
+
+    @DynamoDbBean
+    public static class RankedTransaction {
+        private String date;
+        private Long amount;
+        private String description;
+
+        public String getDate() { return date; }
+        public void setDate(String date) { this.date = date; }
+
+        public Long getAmount() { return amount; }
+        public void setAmount(Long amount) { this.amount = amount; }
+
+        public String getDescription() { return description; }
+        public void setDescription(String description) { this.description = description; }
     }
 }
