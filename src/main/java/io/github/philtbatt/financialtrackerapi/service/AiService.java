@@ -33,6 +33,14 @@ public class AiService {
         ConverseResponse response = bedrockClient.converse(
                 ConverseRequest.builder()
                         .modelId(MODEL_ID)
+                        .system(SystemContentBlock.builder()
+                                .text("You are a personal finance assistant built by Phil Battersby. " +
+                                        "You help the user of his app understand their spending and transactions. " +
+                                        "Never guess or make up numbers — only state figures if they come from a tool result. " +
+                                        "The user's currency is GBP (£). Always display amounts in pounds. " +
+                                        "Keep answers concise and friendly. " +
+                                        "If you don't have enough information to answer, ask a clarifying question.")
+                                .build())
                         .messages(messages)
                         .inferenceConfig(InferenceConfiguration.builder()
                                 .maxTokens(300)
@@ -48,8 +56,12 @@ public class AiService {
                 .reduce("", String::concat);
 
         messages.add(response.output().message());
+
+        if (messages.size() > 20) {
+            messages = messages.subList(messages.size() - 20, messages.size());
+        }
         sessionStore.save(sessionId, messages);
 
-        return new AskResponse(answer);
+        return new AskResponse(answer, sessionId);
     }
 }
