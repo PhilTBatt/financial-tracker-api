@@ -17,6 +17,6 @@ public class AiController {
 
     @PostMapping("/ask")
     public AskResponse ask(@RequestBody AskRequest request) {
-        return aiService.ask(request.message());
+        return aiService.ask(request.sessionId(), request.message());
     }
 }
