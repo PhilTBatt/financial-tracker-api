@@ -14,7 +14,7 @@ Lambda repo: https://github.com/PhilTBatt/financial-tracker-api-lambda-layer
 
 - Java (Spring Boot)
 - Docker
-- AWS (S3 + DynamoDB)
+- AWS (S3 + Lambda + DynamoDB + Bedrock)
 
 ---
 
@@ -29,6 +29,7 @@ Lambda repo: https://github.com/PhilTBatt/financial-tracker-api-lambda-layer
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 AWS_REGION=eu-north-1
+AWS_BEDROCK_API_KEY=your_api_key
 ```
 
 ### Run Locally (Docker)

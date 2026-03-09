@@ -31,8 +31,8 @@ public class FileController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Get transaction list")
     @GetMapping("/transactions/{id}")
+    @Operation(summary = "Get transaction list")
     public ResponseEntity<TransactionRecord> get(@PathVariable String id) {
         TransactionRecord item = dynamoDBService.getById(id);
         return item == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(item);
